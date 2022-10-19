@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login-Signup</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+
+    <link rel="stylesheet" type="text/css" href="login.css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.js"></script>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1 class="header">signUp Page</h1>
+    </div>
+
+    <div class="login-page">
+        <div class="form">
+            <form  id="loginForm" class="register-form"  >
+               
+                
+                <input  id="email_n" type="text" placeholder="Email" />
+                <input id="password_n" type="password" placeholder="Password" />
+                <i class="bi bi-eye-slash" id="togglePassword"></i>
+                <button type="submit" id="register">Register</button>
+                <p class="message">Already registered? <a href="/login">Sign In</a></p>
+            </form>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
+    <script>
+        const firebaseConfig = {
+        apiKey: "AIzaSyCDDsH9sBaorv9czT6FlSLJ__68JJJtBkU",
+        authDomain: "uplift-8715a.firebaseapp.com",
+        projectId: "uplift-8715a",
+        storageBucket: "uplift-8715a.appspot.com",
+        messagingSenderId: "317675359844",
+        appId: "1:317675359844:web:16823184128009e23dd971"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+        const newUser = document.getElementById('register');
+        const email_n = document.getElementById('email_n');
+        const pass_n = document.getElementById('password_n');
+        newUser.addEventListener('click',(e)=>{
+            e.preventDefault(); 
+            const email_val = email_n.value;
+            const password_val=pass_n.value;
+            firebase.auth().createUserWithEmailAndPassword(email_val,password_val)
+            .then(({user})=>{
+                return user.getIdToken().then((idToken)=>{
+                    return fetch("/sessionLogin",{
+                        method:'POST',
+                        headers:{
+                            Accept:'application/json',
+                            "Content-Type":"application/json",
+                            "CSRF-Token":Cookies.get("XSRF-Token")
+                        },
+                        body:JSON.stringify({idToken})
+                    })
+                })
+            })
+           .then(()=>{
+            return firebase.auth().signOut()
+           }) 
+           .then(()=>{
+            window.location.assign("/profile")
+           })
+        })
+  
+    </script>
+
+    <script src="login.js"></script>    
+</body>
+
+</html>
