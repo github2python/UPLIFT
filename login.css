@@ -1,0 +1,88 @@
+div.header {
+    padding: 1px;
+    background-color: black;
+    clear: left;
+    border-radius: 20px;
+    box-shadow: 5px 10px 18px black;
+
+}
+
+h1.header {
+    padding: 10px;
+    margin: 0;
+    color: white;
+}
+
+.login-page {
+    width: 450px;
+    padding: 150px 0 0 0;
+    margin: auto;
+
+}
+
+.form {
+    position: relative;
+    background: black;
+    width: 360px;
+    margin: 0 auto 100px;
+    padding: 50px;
+    text-align: left;
+    box-shadow: 5px 10px 18px black;
+    border-radius: 10px;
+}
+
+.form input {
+    font-family: Arial, Helvetica, sans-serif;
+    background: white;
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    margin: 0 0 15px;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.form button {
+    font-family: Arial, Helvetica, sans-serif;
+    background: skyblue;
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    padding: 15px;
+    color: white;
+    font-size: 14px;
+}
+
+.form button:hover,
+.form button:active,
+.form button:focus {
+    background: blue;
+    transition: 0.5s;
+}
+
+.form .message {
+    margin: 20px 0 0 0;
+    color: white;
+    font-size: 15px;
+}
+
+.form .message a {
+    color: skyblue;
+    text-decoration: underline;
+}
+
+.form .message a:hover {
+    color: blue;
+}
+
+
+body {
+    background: skyblue;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+form i {
+    margin-left: -30px;
+    cursor: pointer;
+}

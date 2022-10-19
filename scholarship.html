@@ -1,0 +1,85 @@
+<html>
+<head>
+  <title> My Simple Homepage</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="scholarship.css">
+<body>
+
+<div class="container">
+  <div class="headerImg"></div>
+  <div class="header"><h1 class="header">Scholarship</h1>
+ </div>
+  <div class="left">
+
+<h2>Samarthya will filter scholarship for you according to your eligibility</h2>
+<p id="para"> 
+  <div class="list">
+    <table>
+        <thead>
+            <th>Scholarship Name</th>
+            <th>Reward</th>
+            <th>Family Income</th>
+            <th>Website Link</th>
+
+        </thead>
+        <tbody id="tbod"></tbody>
+    </table>
+</div>
+</p></div>
+  <div class="content">
+    <h2>Scholarship</h2>
+    <p> </p>
+<p>     <form class="resume" id="resume-form">
+    <h3>Enquiry</h3>
+    
+    <br>
+    <br>
+    <div>
+        <label for="class">Highest Qualification</label>
+       
+            <select name="myclass" id="class">
+                <option value="X">10TH</option>
+                <option value="XII">12TH</option>
+                
+                <option value="grad">GRADUATION</option>
+            </select>
+       
+    </div>
+    <br>
+    <div>
+        <label for="board">Board/University</label>
+        <input type="text" name="myboard" id="board" placeholder="Enter the name of Board/University">
+    </div>
+    <br>
+    <div>
+        <label for="CGPA">Percentage in latest Degree/CGPA</label>
+        <input type="text" name="myCGPA" id="CGPA"placeholder="Enter the percentage">
+    </div>
+    <br>
+    <br>
+    <div>
+        <label for="income">Family Income</label>
+        <input type="text" name="myfamilyincome" id="income"placeholder="Enter the family income">
+    </div>
+    <br>
+    <div>
+        Country : 
+        <input type="radio" id="inscolarshipreach" name="myscholarshipreach" value="inscolarshipreach"
+               checked>
+        <label for="inscolarshipreach">India</label>
+      
+  
+      
+        <input type="radio" id="aboradscholarshipreach" name="myscholarshipreach" value="aboradscholarshipreach">
+        <label for="aboradscholarshipreach">Aborad</label>
+      </div>
+
+</form>
+  <div class="footer"></div>
+</div>
+
+
+<script src="scholarship.js"></script>
+</body>
+</html>
