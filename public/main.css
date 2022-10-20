@@ -173,13 +173,13 @@ section{
     width:100%;
 
 }
-section:nth-child(2n) {
+/* section:nth-child(2n) {
     background-color: #9e9b9b29;
 }
 
 section:nth-child(2n + 1) {
     background-color: white;
-}
+} */
 #about{
     /* margin-top: 5%; */
     width:70%;
@@ -222,85 +222,30 @@ section:nth-child(2n + 1) {
      margin-left: -3px;
 } */
 
-
+#companyname{
+    margin-top:-5%;
+    font-size:500%;
+    font-weight: 900;
+    /* font-style: italic; */
+    color: lightslategray;
+    text-align: center;
+}
 
 @media only screen   and (max-width:768px) 
 {
-    .timeline-divider{
-       left:5% !important;
-    }
-
-    .timeline-box
-    {
-         margin-top: 20px;
-         margin-bottom: 20px;
-         left:12% !important;
-         width:80% !important;
-
-    }
+    
     /* //removing circles */
 
-    .timeline-box:nth-child(2n+1)::after{
-        content:'';
-        position: absolute;
-        top:30%;
-        right:-13%;
-        border-radius: 50%;
-        background-color:rgb(239,239,239);
-        
-        width:0.7rem;
-        height: 0.7rem;
-        z-index: 1;
-   } 
+  
 
-   .timeline-box:nth-child(2n)::after{
-    content:'';
-    position: absolute;
-    top:30%;
-    right:-13%;
-    border-radius: 50%;
-    background-color:rgb(239,239,239);
-    
-    width:0.7rem;
-    height: 0.7rem;
-    z-index: 1;
-    } 
-
+ 
     /* adding circle */
 
 
-    .timeline-box:nth-child(2n+1)::before{
-        content:'';
-        position: absolute;
-        top:30%;
-        left:-11%;
-        border-radius: 50%;
-        background-color:lightslategray;
-        
-        width:0.7rem;
-        height: 0.7rem;
-        z-index: 1;
-    }
-    .timeline-box:nth-child(2n)::before{
-        content:'';
-        position: absolute;
-        top:30%;
-        left:-11%;
-        border-radius: 50%;
-        background-color:lightslategray;
-        
-        width:0.7rem;
-        height: 0.7rem;
-        z-index: 1;
-    }
+   
+   
   
-    .timeline-box:nth-child(2n+1)
-    {
-         margin-top: 20px;
-         margin-bottom: 20px;
-         left:5%;
-        
-    }
+   
     html
     {
         font-size: 15px;
@@ -334,90 +279,23 @@ section:nth-child(2n + 1) {
 
 
 }
+.tagcolorchange{
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+}
 @media only screen   and (max-width:572px) 
 {
     .timeline-divider{
        left:2% !important;
     }
 
-    .timeline-box
-    {
-         margin-top: 20px;
-         margin-bottom: 20px;
-         left:12% !important;
-         width:100% !important;
 
-    }
-    /* //removing circles */
-
-    .timeline-box:nth-child(2n+1)::after{
-        content:'';
-        position: absolute;
-        top:30%;
-        right:-13%;
-        border-radius: 50%;
-        background-color:rgb(239,239,239);
-        
-        width:0.7rem;
-        height: 0.7rem;
-        z-index: 1;
-   } 
-
-   .timeline-box:nth-child(2n)::after{
-    content:'';
-    position: absolute;
-    top:30%;
-    right:-13%;
-    border-radius: 50%;
-    background-color:rgb(239,239,239);
-    
-    width:0.7rem;
-    height: 0.7rem;
-    z-index: 1;
-    } 
-
-    /* adding circle */
-
-
-    .timeline-box:nth-child(2n+1)::before{
-        content:'';
-        position: absolute;
-        top:30%;
-        left:-11%;
-        border-radius: 50%;
-        background-color:lightslategray;
-        
-        width:0.7rem;
-        height: 0.7rem;
-        z-index: 1;
-    }
-    .timeline-box:nth-child(2n)::before{
-        content:'';
-        position: absolute;
-        top:30%;
-        left:-11%;
-        border-radius: 50%;
-        background-color:lightslategray;
-        
-        width:0.7rem;
-        height: 0.7rem;
-        z-index: 1;
-    }
-  
-    .timeline-box:nth-child(2n+1)
-    {
-         margin-top: 20px;
-         margin-bottom: 20px;
-         left:5%;
-        
-    }
     html
     {
         font-size: 10px;
     }
-    .aeroplane-icon i {
-        font-size:3rem !important;
-    }
+    
     .Navigation ul a{
         font-size: rem;
         text-decoration: none;
@@ -472,55 +350,9 @@ section:nth-child(2n + 1) {
 
     
 }
-.timeline-divider{
-    position: absolute;
-    left:50%;
-    top:10%;
-    height:75%;
-    border:3px dotted #0096fa6b;
-    width:0px;
-}
-.aeroplane-icon{
-    position: sticky;
-     top:25%;
-    margin-left: -15px;
-    z-index: 2;
-}
-.aeroplane-icon i{
 
 
-    font-size:2em;
-    transform: rotate(180deg) ;
-    color:rgb(24,49,83);
-   
 
-}
-.college h3::after
-{
-    content:'';
-    display: inline-block;
-    margin-left: 20px;
-    
-    height: 50px;
-    width:50px;
-    background-size: contain;
-    background-image: url(/images/iit-ism-logo.jpg);
-
-  
-}
-.school h3::after
-{
-    content:'';
-    display: inline-block;
-    margin-left: 20px;
-    
-    height: 50px;
-    width:50px;
-    background-size: contain;
-    background-image: url(/images/nvps.png);
-
-  
-}
 /* pathselector */
 .pathselector
 {
@@ -538,7 +370,7 @@ section:nth-child(2n + 1) {
     border:2px solid black;
     /* display: flex; */
     /* margin-left: 20%; */
-    background-image:linear-gradient(green,white);
+    background-image:linear-gradient(rgb(100, 111, 100),white);
 }
 /* contact */
 #contact{
@@ -585,9 +417,3 @@ section:nth-child(2n + 1) {
     padding-bottom: 30px;;
 
 }
-
-
-
-
-
-
