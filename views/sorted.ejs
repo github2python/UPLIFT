@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+    <title>Your sorted choices</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>FamilyIncome</td>
+            <td>Reward</td>
+            <td>Percentage</td>
+        </tr>
+        <% for(let i of temp){ %>
+            <tr>
+                <td><%= i.familyincome %></td>
+                <td><%= i.reward %></td>
+                <td><%= i.percentage %></td>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>
+    

@@ -1,5 +1,4 @@
-<html>
-<head>
+<%- include('partials/header') %>
   <title> Career</title>
 </head>
 
@@ -16,52 +15,66 @@
 <p>
   
   </p></div>
+  <div>
+    <table>
+      <tr>
+        <td>Name</td>
+        <td>Skills</td>
+        <td>Standard</td>
+        <td>Organization</td>
+      </tr>
+      <% for(let i of list){ %>
+        <tr>
+          <td><%= i.name %></td>
+          <td><%= i.skills %></td>
+          <td><%= i.standard %></td>
+          <td><%= i.organization %></td>
+        </tr>
+      <% } %>
+    </table>
+  </div>
   <div class="content">
     <h1 style="color:black">Jobs</h1>
     <p>
     </p>
-    <form>
-   
-    
+    <form action="/home/jobs/specify">
     <br>
     <br>
     <div>
-        <label for="class">Highest Qualification</label>
+        <label for="class">Qualification</label>
        
             <select name="myclass" id="class">
-                <option value="X">10TH</option>
-                <option value="XII">12TH</option>
-                
-                <option value="grad">GRADUATION</option>
+                <option value="illiterate">ILLITERATE</option>
+                <option value="graduate">GRADUATION</option>
             </select>
        
     </div>
     <br>
     <div>
-        <label for="board">Board/University</label>
-        <input type="text" name="myboard" id="board" placeholder="Enter the name of Board/University">
+        <label for="board">Name</label>
+        <input type="text" name="name" id="board" placeholder="Enter the Occupation">
     </div>
     <br>
     <div>
-        <label for="CGPA">Percentage in latest Degree/CGPA</label>
-        <input type="text" name="myCGPA" id="CGPA"placeholder="Enter the percentage">
+        <label for="CGPA">Skills</label>
+        <input type="text" name="skills" id="CGPA" placeholder="Enter your skills">
     </div>
+    <div>
+      <label for="sal">Salary</label>
+      <input type="text" name="salary" id="sal" placeholder="Enter your salary">
+    </div>
+    <button type="submit">Create Resume</button>
     <br>
     <br>
-    
     <br>
     
 
 </form>
- Not having resume not to worry create on here
- <!-- <button onclick="location.href='resume.html'" class="pathselector">Create Resume</button> -->
- <a href="/home/createResume" class="pathselector">Create Resume</a>
 </p>
    
   <div class="footer"></div>
 </div>
 
 
-<script src="scholarship.js"></script>
 </body>
 </html>

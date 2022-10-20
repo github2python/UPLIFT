@@ -7,10 +7,64 @@ const csrf = require('csurf');
 const admin = require('firebase-admin')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-
+const Student = require('./models/student');
+const Job=require('./models/job')
+const detail=require("./seed/a");
+const det=require("./seed/b")
 app.listen(3000, () => {
     console.log("Hello! listening on port 3000");
 })
+mongoose.connect('mongodb://localhost:27017/uplift', {
+    useUnifiedTopology: true
+});
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => {
+    console.log("Database connected");
+});
+
+// const seedDB = async () => {
+//   // await Student.deleteMany({});
+//   for (let i = 0; i < 12; i++) {
+//       const stu = new Student({
+//           name:`${detail[i].name}`,
+//           familyincome:`${detail[i].familyincome}`,
+//           reward:`${detail[i].reward}`,
+//           percentage:`${detail[i].percentage}`,
+//           standard:`${detail[i].standard}`,
+//           website:`${detail[i].website}`
+//       })
+//       await stu.save();
+//   }
+// }
+
+// seedDB().then(() => {
+//   mongoose.connection.close();
+// })
+
+
+
+// const seedDB = async () => {
+//   await Job.deleteMany({});
+//   for (let i = 0; i < 7; i++) {
+//       const joy = new Job({
+//           name:`${det[i].name}`,
+//           standard:`${det[i].standard}`,
+//           skills:`${det[i].skills}`,
+//           organization:`${det[i].organization}`,
+//           salary:`${det[i].salary}`
+
+//       })
+//       await joy.save();
+//   }
+// }
+
+// seedDB().then(() => {
+//   mongoose.connection.close();
+// })
+
+
 
 
 var serviceAccount = require("./serviceAccountKey.json");
@@ -22,7 +76,7 @@ admin.initializeApp({
 const csrfMiddleware = csrf({cookie:true});
 const PORT = process.env.PORT || 3000;
 
-//app.engine("html", require("ejs").renderFile);
+app.engine("html", require("ejs").renderFile);
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
@@ -49,7 +103,7 @@ app.get("/home", function (req, res) {
   // console.log(req.body)
   admin
     .auth()
-    .verifySessionCookie(sessionCookie, true /** checkRevoked */)
+    .verifySessionCookie(sessionCookie, true)
     .then(() => {
       res.render("index");
     })
@@ -93,11 +147,32 @@ app.get("/home/profile", (req, res) => {
 
 
 
-app.get('/home/scholarship', (req, res) => {
-    res.render('scholarship');
+app.get('/home/scholarship', async(req, res) => {
+    const list = await Student.find({});
+    res.render('scholarship',{ list });
 })
-app.get('/home/jobs', (req, res) => {
-    res.render('jobs');
+app.get('/home/scholarship/specify',async(req,res)=>{
+  console.log(req.query);
+  const income= parseInt(req.query.myfamilyincome,10);
+  const cgpa = parseInt(req.query.myCGPA,10);
+  // console.log(grade);
+  // console.log(cgpa);
+  const temp = await Student.find({$and: [{"percentage":{$gt:`${cgpa}`}},{"familyincome":{$gt:`${income}`}}]});
+  res.render("sorted",{ temp })
+  // console.log(temp);
+})
+app.get('/home/jobs', async(req, res) => {
+  const list = await Job.find({});
+    res.render('jobs',{ list });
+})
+app.get('/home/jobs/specify',async(req,res) => {
+  const occup = req.query.name;
+  const education = req.query.myclass;
+  console.log(education);
+  const temp = await Job.find({$and:[{"name":occup},{"standard":education}]});
+  // console.log(temp);
+  res.render('jobsort',{ temp })
+  
 })
 // app.get('/home/createResume', (req, res) => {
 //     res.render('resume');

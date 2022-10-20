@@ -1,12 +1,12 @@
-<html>
-<head>
+<%- include('partials/header') %>
   <title>Scholarship</title>
+  <link rel="stylesheet" type="text/css" href="/scholarship.css">
 </head>
 
-<link rel="stylesheet" type="text/css" href="/scholarship.css">
+
 <body>
 
-<div class="container">
+<!-- <div class="container">
   <div class="headerImg"></div>
   <div class="header"><h1 class="header">Scholarship</h1>
  </div>
@@ -14,23 +14,22 @@
 
 <h2>Samarthya will filter scholarship for you according to your eligibility</h2>
 <p id="para"> 
-  <div class="list">
+<div class="list">
     <table>
         <thead>
             <th>Scholarship Name</th>
             <th>Reward</th>
             <th>Family Income</th>
             <th>Website Link</th>
-
         </thead>
         <tbody id="tbod"></tbody>
     </table>
 </div>
-</p></div>
+</p></div> -->
   <div class="content">
     <h2>Scholarship</h2>
     <p> </p>
-<p>     <form class="resume" id="resume-form">
+<p> <form class="resume" id="resume-form" action="/home/scholarship/specify">
     <h3>Enquiry</h3>
     <br>
     <br>
@@ -72,13 +71,27 @@
       
         <input type="radio" id="aboradscholarshipreach" name="myscholarshipreach" value="aboradscholarshipreach">
         <label for="aboradscholarshipreach">Aborad</label>
+        <button type="submit">Submit</button>
       </div>
 
 </form>
+<div>
+  <table>
+    <tr>
+      <td>Name</td>
+      <td>Reward</td>
+      <td>Standard</td>
+    </tr>
+    <% for(let i of list){ %>
+      <tr>
+        <td><%= i.name %></td>
+        <td><%= i.reward %></td>
+        <td><%= i.standard %></td>
+      </tr>
+    <% } %>
+  </table>
+</div>
   <div class="footer"></div>
 </div>
-
-
-<script src="scholarship.js"></script>
 </body>
 </html>

@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+    <title>JobSort</title>
+</head>
+<body>
+    <h1>JOB sorted</h1>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>Standard</td>
+            <td>Organization</td>
+            <td>Salary</td>
+            <td>Skills</td>
+        </tr>
+        <% for(let i of temp){ %>
+            <tr>
+                <td><%= i.name %></td>
+                <td><%= i.standard %></td>
+                <td><%= i.organization %></td>
+                <td><%= i.salary %></td>
+                <td><%= i.skills %></td>
+            </tr>
+        <% } %>
+    </table>
+
+
+</body>
+</html>
