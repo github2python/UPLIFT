@@ -28,32 +28,67 @@
                 <i class="bi bi-eye-slash" id="togglePassword"></i>
                 <button type="submit" id="login">LOGIN</button>
                 <p class="message">Not registered? <a href="/signup">Create an account</a></p>
-                <p class="message"><a href="/forgotPassword">forgot password?</a></p>
+                <!-- <p class="message"><a href="/forgotPassword">forgot password?</a></p> -->
                 
             </form>
         </div>
     </div>
 
-
-
-
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     <script>
-        const firebaseConfig = {
-        apiKey: "AIzaSyCDDsH9sBaorv9czT6FlSLJ__68JJJtBkU",
-        authDomain: "uplift-8715a.firebaseapp.com",
-        projectId: "uplift-8715a",
-        storageBucket: "uplift-8715a.appspot.com",
-        messagingSenderId: "317675359844",
-        appId: "1:317675359844:web:16823184128009e23dd971"
+        var firebaseConfig = {
+            apiKey: "AIzaSyCDDsH9sBaorv9czT6FlSLJ__68JJJtBkU",
+            authDomain: "uplift-8715a.firebaseapp.com",
+            projectId: "uplift-8715a",
+            storageBucket: "uplift-8715a.appspot.com",
+            messagingSenderId: "317675359844",
+            appId: "1:317675359844:web:16823184128009e23dd971"
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-  
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+        const newUser = document.getElementById('login');
+        const email_n = document.getElementById('email');
+        const pass_n = document.getElementById('password');
+        newUser.addEventListener('click', (e) => {
+            e.preventDefault();
+            const email_val = email_n.value;
+            const password_val = pass_n.value;
+            firebase.auth().signInWithEmailAndPassword(email_val, password_val)
+            .then(({ user }) => {
+                const email1=user.email;
+                const pass1=user.password;
+                console.log(email1);
+                return user.getIdToken().then((idToken) => {
+                    return fetch("/sessionLogin", {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            "Content-Type": "application/json",
+                            "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                        },
+                        body: JSON.stringify({ idToken })
+                    })
+                })
+            })
+            .then(() => {
+                return firebase.auth().signOut()
+            })
+            .then(() => {
+                window.location.assign("/home")
+            })
+            return false;
+        })
+
     </script>
-    <script src="login.ejs"></script>
+
+
+
+    
+<!-- <script src="login.ejs"></script> -->
 </body>
 
 </html>

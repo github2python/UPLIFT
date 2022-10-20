@@ -12,10 +12,12 @@ app.listen(3000, () => {
     console.log("Hello! listening on port 3000");
 })
 
-const serviceAccount = require("./serviceAccountKey.json");
+
+var serviceAccount = require("./serviceAccountKey.json");
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://uplift-8715a-default-rtdb.firebaseio.com"
 });
 const csrfMiddleware = csrf({cookie:true});
 const PORT = process.env.PORT || 3000;
@@ -37,60 +39,66 @@ app.all('*',(req,res,next)=>{
     next();
 })
 app.get('/login', (req, res) => {
-    res.render("login.ejs");
+    res.render("login");
 })
 app.get('/signup', (req, res) => {
     res.render('signup');
 })
-
+app.get("/home", function (req, res) {
+  const sessionCookie = req.cookies.session || "";
+  // console.log(req.body)
+  admin
+    .auth()
+    .verifySessionCookie(sessionCookie, true /** checkRevoked */)
+    .then(() => {
+      res.render("index");
+    })
+    .catch((error) => {
+      res.redirect("/login");
+    });
+});
 app.post('/sessionLogin',(req,res)=>{
     const idToken=req.body.idToken.toString();
     const expiresIn=60*60*24*5*1000;
-    admin
-    .auth()
-    .createSessionCookie(idToken,{expiresIn})
-    .then(
-        (sessionCookie) => {
-            const options = {maxAge:expiresin,httpOnly:true}
-            res.cookie("session",sessionCookie,options)
-            res.send(JSON.stringify({status:"success"}))
-        },
-        (error)=> {
-            res.status(401).send("Sorry Unauthorized request")
-            res.redirect("/login")
-        }
-        
-    )
-})
-app.get("/home", function (req, res) {
-    const sessionCookie = req.cookies.session || "";
-   
+    //console.log(req.body);
     admin
       .auth()
-      .verifySessionCookie(sessionCookie, true /** checkRevoked */)
-      .then(() => {
-        res.render("index");
+      .createSessionCookie(idToken,{expiresIn})
+      .then(
+          (sessionCookie) => {
+              const options = {maxAge:expiresIn, httpOnly:true}
+              res.cookie("session",sessionCookie,options)
+              res.send(JSON.stringify({status:"success"}))
+          },
+          (error)=> {
+              res.status(401).send("Sorry Unauthorized request")
+              window.alert("Incorrect details")
+              // res.redirect("/login")
+          }
+        
+      )
+      .catch(error => {
+        console.log(error.message)
       })
-      .catch((error) => {
-        res.redirect("/login");
-      });
-  });
+});
+
 app.get("/sessionLogout", (req, res) => {
     res.clearCookie("session");
     res.redirect("/login");
-  });
+});
+app.get("/home/profile", (req, res) => {
+  res.render("profile")
+  //console.log(req.body);
+});
 
-// app.get('/home', (req, res) => {
-//     res.render('index');
-// })
 
 
-// app.get('/home/scholarship', (req, res) => {
-//     res.render('scholarship');
-// })
-// app.get('/home/jobs', (req, res) => {
-//     res.render('jobs');
-// })
+app.get('/home/scholarship', (req, res) => {
+    res.render('scholarship');
+})
+app.get('/home/jobs', (req, res) => {
+    res.render('jobs');
+})
 // app.get('/home/createResume', (req, res) => {
 //     res.render('resume');
 // })
@@ -123,6 +131,6 @@ app.get("/sessionLogout", (req, res) => {
 
 
 // app.get('*', (req, res) => {
-//     res.send("<script>alert('Sorry the page you searched not exists')</script>");
+//     //res.send("<script>alert('Sorry the page you searched not exists')</script>");
 //     res.redirect('/login');
 // })
