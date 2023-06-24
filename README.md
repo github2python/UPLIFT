@@ -1,5 +1,5 @@
-# UPLIFT
-Concetto project
+# UPLIFT (Team Samarthya)
+Concetto + Hackfest'22 project
 The idea of this website first germinated in our minds when one of our teammates
 discussed his neighbor’s daughter who got through a reputed engineering college in
 our country, however, due to unfavorable circumstances propelled during the
